@@ -3,132 +3,153 @@
   display: flex;
   align-items: center;
   background-color: #131921;
-  position: sticky;
-  top: 0;
+  width: 100%;
+  position: fixed;
+  top: 0px;
   z-index: 100;
 }
 
 .header_logo {
   font-family: "Kaushan Script", cursive;
-  font-size: 1.6rem;
+  font-size: 1.5em;
   color: #f9f9f9;
-  width: 120px;
+  /* width: 120px; */
   margin: 0 20px;
   padding: 5px;
-}
-
-.header_logo:hover {
   cursor: pointer;
-  border: 1px solid #f9f9f9;
-  border-radius: 5px;
 }
 
+/* *********************************************DELIVERY  */
 .header_delivery {
-  color: rgba(236, 226, 226, 0.699);
-  font-size: 0.75rem;
+  color: rgb(225, 225, 225);
+  font-size: 0.55em;
+  align-self: center;
 }
 
 .header_deliveryAddr {
-  font-size: 1.1rem;
+  color: #f3f3f3;
+  font-size: 0.85em;
   font-weight: 20;
+  align-self: center;
 }
 
+/* ********************************************* SEARCH */
 .header_search {
   display: flex;
   flex: 1;
   border-radius: 45px;
   align-items: center;
+  /* max-width: 830px; */
+  min-width: 300px;
   padding: 2px;
 }
 
-.header_searchCatogory{
-    background-color: rgba(248, 230, 230, 0.945);
-    font-size: 14px;
-    height: 30px !important;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    align-items: center;
-    text-align: center;
-    padding-top: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    cursor: pointer;
+.header_searchCatogory {
+  background-color: #f3f3f3;
+  font-size: 14px;
+  height: 30px !important;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.header_searchCatogory span {
+  display: flex;
 }
 
 .header_searchInput {
   height: 20px;
   padding: 10px;
   width: 100%;
-  border: none;  
+  border: none;
+  outline: none;
 }
 
 .header_searchIcon {
-  padding: 5px;
+  padding: 5px 10px;
   height: 30px !important;
   background-color: #dfa963;
-  font-size: 30px;
+  font-size: 20px;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   cursor: pointer;
 }
 
-.header_searchIcon:hover{
-    background-color: #c0720b;
+.header_searchIcon:hover {
+  background-color: #c0720b;
 }
 
+/* ***********************************************NAV OPTIONS */
 .header_nav {
   display: flex;
   justify-content: space-evenly;
 }
 
+.header_optionLang {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.header_optionLang span{
+  color: #f9f9f9;
+  font-size: 0.8em;
+}
+
+.header_optionLangArrow {
+  color: #f9f9f9;
+}
+
 .header_option {
+  /* display: inline-flex; */
   display: flex;
   flex-direction: column;
   margin-left: 10px;
   margin-right: 10px;
   padding: 5px;
   color: #f9f9f9;
-}
-
-.header_option:hover {
   cursor: pointer;
-  border: 1px solid #f9f9f9;
-  border-radius: 5px;
 }
 
 .header_optionLineOne {
-  font-size: 10px;
+  margin-top: 10px;
+  display: flex;
+  font-size: 0.6em;
 }
 
 .header_optionLineTwo {
-  font-size: 14px;
-  font-weight: 800;
-}
-
-.header_optionBasket {
-  position: relative;
   display: flex;
-  align-items: center;
-  color: #f9f9f9;
+  font-size: 0.8em;
+  font-weight: 800;
+  margin-bottom: 10px;
 }
 
-.header_optionBasket:hover {
-    cursor: pointer;
-    border: 1px solid #f9f9f9;
-    border-radius: 5px;
-  }
+/* *******************************************************CART */
+.header_optionBasket {
+  display: flex;
+  color: #f9f9f9;
+  padding: 5px;
+  margin: 0px 10px;
+  align-items: center;
+}
 
 .header_cart {
-  font-size: 40px;
-  margin-right: 10px;
-  padding: 5px;
+  display: flex;
+  font-size: 2.5em;
 }
 
 .header_basketCount {
-  font-size: 15px;
-  position: absolute;
-  left: 1.4rem;
-  bottom: 1.1rem;
-  z-index: 100;
+  display: flex;
+  /* align-self: flex-end; */
+  font-size: 0.7em;
+  font-weight: 500;
+  padding: 5px;
+  padding-top: 10px;
+  font-size: 18px;
   color: #cd9042;
 }
