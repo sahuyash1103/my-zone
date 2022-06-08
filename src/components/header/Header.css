@@ -4,9 +4,9 @@
   align-items: center;
   background-color: #131921;
   width: 100%;
-  position: fixed;
+  position: sticky;
   top: 0px;
-  z-index: 100;
+  z-index: 50;
 }
 
 .header_logo {
@@ -16,7 +16,6 @@
   /* width: 120px; */
   margin: 0 20px;
   padding: 5px;
-  cursor: pointer;
 }
 
 /* *********************************************DELIVERY  */
@@ -53,7 +52,6 @@
   display: flex;
   align-items: center;
   padding: 5px 10px;
-  cursor: pointer;
 }
 
 .header_searchCatogory span {
@@ -75,7 +73,6 @@
   font-size: 20px;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
-  cursor: pointer;
 }
 
 .header_searchIcon:hover {
@@ -93,10 +90,9 @@
   align-items: center;
   justify-content: center;
   margin: 5px;
-  cursor: pointer;
 }
 
-.header_optionLang span{
+.header_optionLang span {
   color: #f9f9f9;
   font-size: 0.8em;
 }
@@ -113,7 +109,6 @@
   margin-right: 10px;
   padding: 5px;
   color: #f9f9f9;
-  cursor: pointer;
 }
 
 .header_optionLineOne {
