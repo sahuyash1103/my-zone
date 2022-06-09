@@ -7,7 +7,7 @@ import { useStateValue } from "../../context/StateProvider";
 import "./Header.css";
 
 function Header() {
-  const [{cart}] = useStateValue();
+  const [{ cart }] = useStateValue();
   return (
     <div className="header">
       <Link to="/">
@@ -32,10 +32,12 @@ function Header() {
           <span>Eng</span>
           <IoMdArrowDropdown className="header_optionLangArrow" />
         </div>
-        <div className="header_option">
-          <span className="header_optionLineOne">Hello, Guest</span>
-          <span className="header_optionLineTwo">Sign In</span>
-        </div>
+        <Link to="/login">
+          <div className="header_option">
+            <span className="header_optionLineOne">Hello, Guest</span>
+            <span className="header_optionLineTwo">Sign In</span>
+          </div>
+        </Link>
         <div className="header_option">
           <span className="header_optionLineOne">Returns</span>
           <span className="header_optionLineTwo">& Order</span>
