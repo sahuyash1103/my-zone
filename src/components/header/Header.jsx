@@ -21,7 +21,7 @@ function Header() {
       <Link to="/">
         <div className="header_logo">My-Zone</div>
       </Link>
-      <div className="header_option">
+      <div className="header_option hide_onMobile">
         <span className="header_delivery">Delivery to Guest</span>
         <span className="header_deliveryAddr">choose location</span>
       </div>
@@ -46,7 +46,7 @@ function Header() {
             <span className="header_optionLineTwo">{user ? 'Sign Out' : 'Sign In'}</span>
           </div>
         </Link>
-        <div className="header_option">
+        <div className="header_option hide_onMobile">
           <span className="header_optionLineOne">Returns</span>
           <span className="header_optionLineTwo">& Order</span>
         </div>

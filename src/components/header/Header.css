@@ -15,7 +15,13 @@
   color: #f9f9f9;
   /* width: 120px; */
   margin: 0 20px;
-  padding: 5px;
+  padding: 0 5px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+
+.header_logo:hover {
+  border: 1px solid white;
 }
 
 /* *********************************************DELIVERY  */
@@ -39,14 +45,14 @@
   border-radius: 45px;
   align-items: center;
   /* max-width: 830px; */
-  min-width: 300px;
+  min-width: 150px;
   padding: 2px;
 }
 
 .header_searchCatogory {
   background-color: #f3f3f3;
-  font-size: 14px;
-  height: 30px !important;
+  font-size: 0.8em;
+  height: 25px !important;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
   display: flex;
@@ -61,7 +67,7 @@
 }
 
 .header_searchInput {
-  height: 20px;
+  height: 15px;
   padding: 10px;
   width: 100%;
   border: none;
@@ -70,9 +76,9 @@
 
 .header_searchIcon {
   padding: 5px 10px;
-  height: 30px !important;
+  height: 25px !important;
   background-color: #dfa963;
-  font-size: 20px;
+  font-size: 1.2em;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 }
@@ -109,9 +115,15 @@
   flex-direction: column;
   margin-left: 10px;
   margin-right: 10px;
-  padding: 5px;
+  padding: 0px 5px;
   color: #f9f9f9;
   cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+
+.header_option:hover {
+  border: 1px solid #f9f9f9;
 }
 
 .header_optionLineOne {
@@ -134,6 +146,12 @@
   padding: 5px;
   margin: 0px 10px;
   align-items: center;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+
+.header_optionBasket:hover {
+  border: 1px solid #f9f9f9;
 }
 
 .header_cart {
