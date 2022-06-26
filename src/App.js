@@ -11,6 +11,7 @@ import { useTitle } from "./hooks/useTitle";
 import Header from "./components/header/Header";
 import Home from "./components/home/Home";
 import Checkout from "./components/checkout/Checkout";
+import Payment from "./components/payment/Payment";
 import Login from "./components/login/Login";
 import "./App.css";
 
@@ -32,6 +33,7 @@ function App() {
       }
     });
   }, []);
+
   return (
     <>
       <Router>
@@ -40,7 +42,8 @@ function App() {
             path="/"
             element={
               <>
-                <Header /> <Home />
+                <Header />
+                <Home />
               </>
             }
           />
@@ -50,6 +53,15 @@ function App() {
               <>
                 <Header />
                 <Checkout />
+              </>
+            }
+          />
+          <Route
+            path="/payment"
+            element={
+              <>
+                <Header />
+                <Payment />
               </>
             }
           />

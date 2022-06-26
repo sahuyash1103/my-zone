@@ -12,6 +12,10 @@
   z-index: 1;
 }
 
+.product:hover {
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2);
+}
+
 .product__rating {
   display: flex;
 }
@@ -32,6 +36,10 @@
   /* border-color: #a88734 #9c7e31 #846a29; */
   color: #111;
   cursor: pointer;
+}
+
+.product > button:hover {
+  background-color: #e4a912;
 }
 
 .product__price {

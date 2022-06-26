@@ -2,6 +2,11 @@
   display: flex;
   margin-top: 20px;
   margin-bottom: 20px;
+  padding: 10px;
+}
+
+.checkout_product:hover {
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
 }
 
 .checkout_product_info {
@@ -14,9 +19,12 @@
     border-radius: 5px;
     padding: 5px 20px;
     margin-top: 10px;
-    /* border-color: #a88734 #9c7e31 #846a29; */
     color: #111;
     cursor: pointer;
+}
+
+.checkout_product_info > button:hover {
+    background-color: #e4a912;
 }
 
 .checkout_product_image {

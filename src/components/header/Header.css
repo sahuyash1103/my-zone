@@ -13,22 +13,22 @@
   font-family: "Kaushan Script", cursive;
   font-size: 1.5em;
   color: #f9f9f9;
-  /* width: 120px; */
   margin: 0 20px;
   padding: 0 5px;
   border: 1px solid transparent;
   border-radius: 5px;
 }
 
-.header_logo:hover {
+/* .header_logo:hover {
   border: 1px solid white;
-}
+} */
 
 /* *********************************************DELIVERY  */
 .header_delivery {
   color: rgb(225, 225, 225);
   font-size: 0.55em;
   align-self: center;
+  padding-top: 10px;
 }
 
 .header_deliveryAddr {
@@ -36,6 +36,7 @@
   font-size: 0.85em;
   font-weight: 20;
   align-self: center;
+  padding-bottom: 10px;
 }
 
 /* ********************************************* SEARCH */

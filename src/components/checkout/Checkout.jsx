@@ -6,7 +6,7 @@ import CheckoutProduct from "./checkoutProduct/CheckoutProduct";
 
 function Checkout() {
   const [{ cart, user }] = useStateValue();
-  return (
+  return (<>
     <div className="checkout">
       <div className="checkout_left">
         <img
@@ -16,7 +16,7 @@ function Checkout() {
         />
         <div>
           <h3>Hello, {user ? user.email : "Guest"}</h3>
-          <h2 className="checkout__title">Your shopping Basket</h2>
+          <h2 className="checkout__title">{cart.length ? `you have ${cart.length} items in cart` : "your cart is empty"}</h2>
           {cart?.map((item, i) => (
             <CheckoutProduct
               key={i}
@@ -33,6 +33,18 @@ function Checkout() {
         <Subtotal />
       </div>
     </div>
+    {
+      !cart.length ? <div style={{
+        'display': 'flex',
+        'align-items': 'center',
+        'width': '100%',
+        'justify-content': 'center',
+        'height': '50vh',
+      }}>
+        your cart is empty
+      </div> : ''
+    }
+  </>
   );
 }
 
