@@ -7,6 +7,7 @@ import {
 import { useEffect } from "react";
 import { auth } from "./firebase/firebase";
 import { useStateValue } from "./context/StateProvider";
+import { useTitle } from "./hooks/useTitle";
 import Header from "./components/header/Header";
 import Home from "./components/home/Home";
 import Checkout from "./components/checkout/Checkout";
@@ -15,7 +16,7 @@ import "./App.css";
 
 function App() {
   const [{ user }, dispatch] = useStateValue();
-
+  useTitle("MyZone");
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
       if (authUser) {
@@ -31,7 +32,6 @@ function App() {
       }
     });
   }, []);
-
   return (
     <>
       <Router>
@@ -53,7 +53,10 @@ function App() {
               </>
             }
           />
-          <Route path="/login" element={!user ? <Login /> : <Navigate to="/"/>} />
+          <Route
+            path="/login"
+            element={!user ? <Login /> : <Navigate to="/" />}
+          />
         </Routes>
       </Router>
     </>
