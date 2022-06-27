@@ -1,5 +1,5 @@
 import React from "react";
-import {auth} from "../../firebase/firebase";
+import { auth } from "../../firebase/firebase";
 import { RiShoppingCartLine } from "react-icons/ri";
 import { AiOutlineSearch } from "react-icons/ai";
 import { IoMdArrowDropdown } from "react-icons/io";
@@ -46,10 +46,12 @@ function Header() {
             <span className="header_optionLineTwo">{user ? 'Sign Out' : 'Sign In'}</span>
           </div>
         </Link>
-        <div className="header_option hide_onMobile">
-          <span className="header_optionLineOne">Returns</span>
-          <span className="header_optionLineTwo">& Order</span>
-        </div>
+        <Link to='/orders'>
+          <div className="header_option hide_onMobile">
+            <span className="header_optionLineOne">Returns</span>
+            <span className="header_optionLineTwo">& Order</span>
+          </div>
+        </Link>
         <Link to="/checkout">
           <div className="header_optionBasket">
             <RiShoppingCartLine className="header_cart" />
