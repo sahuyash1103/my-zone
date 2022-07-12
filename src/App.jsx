@@ -14,21 +14,31 @@ import Checkout from "./components/checkout/Checkout";
 import Payment from "./components/payment/Payment";
 import Orders from "./components/orders/Orders";
 import Login from "./components/login/Login";
+import { aboutMe } from "./api/api";
 import "react-toastify/dist/ReactToastify.css"
 import "./App.css";
 
 
 function App() {
-  const [{ user }] = useStateValue();
+  const [{ user }, dispatch] = useStateValue();
   useTitle("MyZone");
   useEffect(() => {
-    
+    if (window.localStorage.getItem('x-auth-token')) {
+      aboutMe()
+        .then((about) => {
+          dispatch({
+            type: "SET_USER",
+            user: about
+          });
+        })
+        .catch((error) => console.log(error))
+    }
   }, []);
 
   return (
     <>
       <Router>
-        <ToastContainer/>
+        <ToastContainer />
         <Routes>
           <Route
             path="/"

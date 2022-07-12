@@ -15,7 +15,7 @@ function Checkout() {
           alt=""
         />
         <div>
-          <h3>Hello, {user ? user.email : "Guest"}</h3>
+          <h3>Hello, {user ? user.username : "Guest"}</h3>
           <h2 className="checkout__title">{cart.length ? `you have ${cart.length} items in cart` : "your cart is empty"}</h2>
           {cart?.map((item, i) => (
             <CheckoutProduct

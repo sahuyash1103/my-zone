@@ -7,11 +7,15 @@ import { useStateValue } from "../../context/StateProvider";
 import "./Header.css";
 
 function Header() {
-  const [{ cart, user }] = useStateValue();
+  const [{ cart, user }, dispatch] = useStateValue();
 
   const handleAuthenticaton = () => {
     if (user) {
-      //TODO 
+      window.localStorage.removeItem("x-auth-token");
+      dispatch({
+        type: "SET_USER",
+        user: null
+      });
     }
   }
 
@@ -41,7 +45,7 @@ function Header() {
         </div>
         <Link to={!user && '/login'}>
           <div onClick={handleAuthenticaton} className="header_option">
-            <span className="header_optionLineOne">Hello, {!user ? "Guest" : user.email}</span>
+            <span className="header_optionLineOne">Hello, {!user ? "Guest" : user.username}</span>
             <span className="header_optionLineTwo">{user ? 'Sign Out' : 'Sign In'}</span>
           </div>
         </Link>

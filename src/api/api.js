@@ -1,19 +1,19 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-axios.interceptors.response.use(success, faliaure);
-
-function success(event) {
-  toast.success(`success: ${event}`);
+const success = (event) => {
+  // console.info(`success: ${event}`);
   return Promise.resolve(event);
-}
+};
 
-function faliaure(error) {
+const faliaure = (error) => {
   console.warn("AXIOS :", error.response.data);
   return Promise.reject(error);
-}
+};
 
-async function loginWithEmailAndPassword(email, password) {
+axios.interceptors.response.use(success, faliaure);
+
+export const loginWithEmailAndPassword = async (email, password) => {
   try {
     const result = await axios.post(
       process.env.REACT_APP_API_END_POINT + "login/",
@@ -28,30 +28,41 @@ async function loginWithEmailAndPassword(email, password) {
       toast.warn(error.response.data);
     }
   }
-}
+};
 
-async function signupUserWithEmailAndPassword(email, password) {
+export const signupUserWithEmailAndPassword = async (email, password) => {
   try {
     const result = await axios.post(
       process.env.REACT_APP_API_END_POINT + "signup/",
       {
-        name: email,
+        username: email.slice(0, email.indexOf("@")),
         email: email,
         password: password,
       }
     );
-    console.log(result);
     return result.headers["x-auth-token"];
   } catch (error) {
     if (error.response && error.response.status === 400) {
       toast.warn(error.response.data);
     }
   }
-}
-
-let auth = {
-  loginWithEmailAndPassword,
-  signupUserWithEmailAndPassword,
 };
 
-export default auth;
+export const aboutMe = async (token = "") => {
+  const headers = {
+    "x-auth-token": token || window.localStorage.getItem("x-auth-token"),
+  };
+
+  try {
+    const result = await axios.get(
+      process.env.REACT_APP_API_END_POINT + "about-me/",
+      { headers }
+    );
+
+    return result.data;
+  } catch (error) {
+    if (error.response && error.response.status === 400) {
+      toast.warn(error.response.data);
+    }
+  }
+};
