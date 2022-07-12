@@ -5,39 +5,30 @@ import {
   Navigate,
 } from "react-router-dom";
 import { useEffect } from "react";
-import { auth } from "./firebase/firebase";
 import { useStateValue } from "./context/StateProvider";
 import { useTitle } from "./hooks/useTitle";
+import { ToastContainer } from "react-toastify";
 import Header from "./components/header/Header";
 import Home from "./components/home/Home";
 import Checkout from "./components/checkout/Checkout";
 import Payment from "./components/payment/Payment";
 import Orders from "./components/orders/Orders";
 import Login from "./components/login/Login";
+import "react-toastify/dist/ReactToastify.css"
 import "./App.css";
 
+
 function App() {
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user }] = useStateValue();
   useTitle("MyZone");
   useEffect(() => {
-    auth.onAuthStateChanged((authUser) => {
-      if (authUser) {
-        dispatch({
-          type: "SET_USER",
-          user: authUser,
-        });
-      } else {
-        dispatch({
-          type: "SET_USER",
-          user: null,
-        });
-      }
-    });
+    
   }, []);
 
   return (
     <>
       <Router>
+        <ToastContainer/>
         <Routes>
           <Route
             path="/"

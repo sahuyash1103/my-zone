@@ -1,5 +1,4 @@
 import React from "react";
-import { auth } from "../../firebase/firebase";
 import { RiShoppingCartLine } from "react-icons/ri";
 import { AiOutlineSearch } from "react-icons/ai";
 import { IoMdArrowDropdown } from "react-icons/io";
@@ -12,7 +11,7 @@ function Header() {
 
   const handleAuthenticaton = () => {
     if (user) {
-      auth.signOut();
+      //TODO 
     }
   }
 

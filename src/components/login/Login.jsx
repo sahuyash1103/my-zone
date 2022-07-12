@@ -1,63 +1,67 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../../firebase/firebase";
-import "./Login.css";
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import auth from '../../api/api';
+import './Login.css';
 
 function Login() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isVisible, setVisible] = useState(false);
 
-  const signIn = (e) => {
+  const login = async (e) => {
     e.preventDefault();
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then((auth) => {
-        if (auth) {
-          navigate("/");
-        }
-      })
-      .catch((error) => alert(error.message));
+    const token = await auth.loginWithEmailAndPassword(email, password);
+    console.log(token);
+    if (token) {
+      window.localStorage.setItem('x-auth-token', token);
+      navigate('/');
+    }
   };
 
-  const register = (e) => {
+  const signup = async (e) => {
     e.preventDefault();
 
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((auth) => {
-        if (auth) {
-          navigate("/");
-        }
-      })
-      .catch((error) => alert(error.message));
+    const token = await auth.signupUserWithEmailAndPassword(email, password);
+    console.log(token);
+    if (token) {
+      window.localStorage.setItem('x-auth-token', token);
+      navigate('/');
+    }
   };
 
   return (
-    <div className="login">
-      <Link to="/">
-        <div className="login_logo">My-Zone</div>
+    <div className='login'>
+      <Link to='/'>
+        <div className='login_logo'>My-Zone</div>
       </Link>
-      <div className="login_container">
+      <div className='login_container'>
         <h1>sign-in</h1>
 
         <form>
           <h5>E-mail</h5>
           <input
-            type="text"
+            type='text'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
 
           <h5>Password</h5>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <div className="password_container">
+            <input
+              type={isVisible ? 'text' : 'password'}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <div id="svg" onClick={() => setVisible(!isVisible)}>
+              {isVisible ? <AiOutlineEye id='visible' /> :
+                <AiOutlineEyeInvisible id='invisible' />}
+            </div>
+          </div>
 
-          <button type="submit" onClick={signIn} className="login_signInButton">
-            Sign In
+          <button type='submit' onClick={login} className='login_signInButton'>
+            Log In
           </button>
         </form>
 
@@ -67,7 +71,7 @@ function Login() {
           Interest-Based Ads Notice.
         </p>
 
-        <button onClick={register} className="login_registerButton">
+        <button onClick={signup} className='login_registerButton'>
           Create your My-Zone Account
         </button>
       </div>

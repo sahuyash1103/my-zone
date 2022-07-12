@@ -22,45 +22,90 @@
   border: 1px solid lightgray;
   padding: 20px;
 }
-.login_container > h1 {
+
+.login_container>h1 {
   font-weight: 500;
   margin-bottom: 20px;
 }
 
-.login_container > form > h5 {
+.login_container>form>h5 {
   margin-bottom: 5px;
 }
 
-.login_container > form > input {
+.login_container>form>input {
   height: 30px;
   margin-bottom: 10px;
   background-color: white;
   width: 90%;
   padding: 0px 5px;
+  outline: none;
+  border: 1px solid lightgray;
+  border-radius: 5px;
 }
 
-.login_container > p {
+.login_container>p {
   margin-top: 15px;
   font-size: 12px;
 }
 
 .login_signInButton {
-  background-color: #f0c14b;
+  background-color: #ffb700;
   border-radius: 5px;
   width: 100%;
   height: 30px;
   border: none;
   margin-top: 10px;
   cursor: pointer;
-  /* border-color: #a88734 #9c7e31 #846a29; */
+}
+
+.login_signInButton:hover {
+  background-color: #e4a912;
 }
 
 .login_registerButton {
   border-radius: 2px;
   width: 100%;
   height: 30px;
-  border: 1px solid;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
   margin-top: 10px;
-  border-color: lightgrey;
   cursor: pointer;
+}
+
+.login_registerButton:hover {
+  background-color: white;
+}
+
+.password_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.password_container>input {
+  height: 30px;
+  background-color: white;
+  width: 90%;
+  padding: 0px 5px;
+  outline: none;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+.password_container>#svg {
+  display: flex;
+  font-size: 1.3em;
+  height: 100%;
+  width: fit-content;
+  padding: 5px 10px;
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+.password_container > #svg:hover {
+  background-color: lightgray;
 }
