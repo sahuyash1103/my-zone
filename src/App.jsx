@@ -24,7 +24,6 @@ function App() {
   const token = window.localStorage.getItem('x-auth-token');
   useTitle("MyZone");
   useEffect(() => {
-    console.log("API END POINT: ", process.env.REACT_APP_API_END_POINT);
     if (token) {
       aboutMe()
         .then((about) => {

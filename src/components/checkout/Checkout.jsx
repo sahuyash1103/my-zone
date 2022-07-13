@@ -36,9 +36,9 @@ function Checkout() {
     {
       !cart.length ? <div style={{
         'display': 'flex',
-        'align-items': 'center',
+        'alignItems': 'center',
+        'justifyContent': 'center',
         'width': '100%',
-        'justify-content': 'center',
         'height': '50vh',
       }}>
         your cart is empty

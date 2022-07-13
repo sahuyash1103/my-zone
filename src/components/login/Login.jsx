@@ -17,12 +17,12 @@ function Login() {
     const token = await loginWithEmailAndPassword(email, password);
     if (token) {
       const about = await aboutMe(token);
+      navigate('/');
       window.localStorage.setItem('x-auth-token', token);
       dispatch({
         type: "SET_USER",
         user: about
       });
-      navigate('/');
     }
   };
 
@@ -32,12 +32,12 @@ function Login() {
     const token = await signupUserWithEmailAndPassword(email, password);
     if (token) {
       const about = await aboutMe(token);
+      navigate('/');
       window.localStorage.setItem('x-auth-token', token);
       dispatch({
         type: "SET_USER",
         user: about
       });
-      navigate('/');
     }
   };
 
