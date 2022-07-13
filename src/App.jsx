@@ -21,9 +21,11 @@ import "./App.css";
 
 function App() {
   const [{ user }, dispatch] = useStateValue();
+  const token = window.localStorage.getItem('x-auth-token');
   useTitle("MyZone");
   useEffect(() => {
-    if (window.localStorage.getItem('x-auth-token')) {
+    console.log("API END POINT: ", process.env.REACT_APP_API_END_POINT);
+    if (token) {
       aboutMe()
         .then((about) => {
           dispatch({
@@ -33,7 +35,7 @@ function App() {
         })
         .catch((error) => console.log(error))
     }
-  }, []);
+  }, [token, dispatch]);
 
   return (
     <>
