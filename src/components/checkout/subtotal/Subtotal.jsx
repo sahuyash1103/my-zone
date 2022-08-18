@@ -6,7 +6,7 @@ import { getCartTotal } from "../../../context/reducer";
 import "./Subtotal.css";
 
 function Subtotal() {
-  const [{ cart }] = useStateValue();
+  const [{ user }] = useStateValue();
   const navigate = useNavigate();
 
   return (
@@ -16,7 +16,7 @@ function Subtotal() {
           <>
             <p>
               {/* Part of the homework */}
-              Subtotal ({cart?.length} items): <strong>{value}</strong>
+              Subtotal ({user?.cart?.length} items): <strong>{value}</strong>
             </p>
             <small className="subtotal__gift">
               <input type="checkbox" /> This order contains a gift
@@ -24,12 +24,12 @@ function Subtotal() {
           </>
         )}
         decimalScale={2}
-        value={getCartTotal(cart)} // Part of the homework
+        value={getCartTotal(user?.cart)} // Part of the homework
         displayType={"text"}
         thousandSeparator={true}
         prefix={"$"}
       />
-      <button onClick={e => cart.length ? navigate('/payment') : null}>Proceed to Checkout</button>
+      <button onClick={e => user?.cart.length ? navigate('/payment') : null}>Proceed to Checkout</button>
     </div>
   );
 }

@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
-import { aboutMe, loginWithEmailAndPassword, signupUserWithEmailAndPassword } from '../../api/api';
-import './Login.css';
 import { useStateValue } from '../../context/StateProvider';
+import { setToken } from '../../services/authService';
+import { aboutMe, loginWithEmailAndPassword, signupUserWithEmailAndPassword } from '../../api/user-api';
+import './Login.css';
 
 function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isVisible, setVisible] = useState(false);
@@ -17,8 +19,10 @@ function Login() {
     const token = await loginWithEmailAndPassword(email, password);
     if (token) {
       const about = await aboutMe(token);
-      navigate('/');
-      window.localStorage.setItem('x-auth-token', token);
+
+      const { state } = location;
+      navigate(state ? state.from?.pathname : '/');
+      setToken(token);
       dispatch({
         type: "SET_USER",
         user: about
@@ -32,8 +36,9 @@ function Login() {
     const token = await signupUserWithEmailAndPassword(email, password);
     if (token) {
       const about = await aboutMe(token);
-      navigate('/');
-      window.localStorage.setItem('x-auth-token', token);
+      const { state } = location;
+      navigate(state ? state.from?.pathname : '/');
+      setToken(token);
       dispatch({
         type: "SET_USER",
         user: about

@@ -1,16 +1,32 @@
 import React from "react";
-import "./CheckoutProduct.css";
 import { useStateValue } from "../../../context/StateProvider";
+import { removeFromCart } from "../../../api/user-api";
+import "./CheckoutProduct.css";
 
-function CheckoutProduct({ id, title, price, rating, image, hideButton }) {
+function CheckoutProduct({ _id, title, price, rating, image, hideButton }) {
   const [, dispatch] = useStateValue();
 
-  const removeFromCart = () => {
+  const addItem = () => {
+    dispatch({
+      type: "ADD_TO_CART",
+      item: {
+        _id,
+        title,
+        image,
+        price,
+        rating,
+      },
+    });
+  }
+
+  const removeItem = () => {
     dispatch({
       type: "REMOVE_FROM_CART",
-      id: id,
+      _id: _id,
     });
+    removeFromCart(_id) || addItem();
   };
+
   return (
     <div className="checkout_product">
       <img className="checkout_product_image" src={image} alt={title} />
@@ -28,7 +44,7 @@ function CheckoutProduct({ id, title, price, rating, image, hideButton }) {
             ))}
         </div>
         {!hideButton &&
-          <button onClick={removeFromCart}>Remove from Basket</button>
+          <button onClick={removeItem}>Remove from Basket</button>
         }
       </div>
     </div>

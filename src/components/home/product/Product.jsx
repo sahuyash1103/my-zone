@@ -1,20 +1,36 @@
 import React from "react";
 import { useStateValue } from "../../../context/StateProvider";
+import { addToCart } from "../../../api/user-api";
+import { useNavigate, useLocation } from "react-router-dom";
+import { getToken } from "../../../services/authService";
 import "./Product.css";
 
-function Product({ id, title, image, price, rating }) {
+function Product({ _id, title, image, price, rating }) {
   const [, dispatch] = useStateValue();
-  const addToBasket = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+
+  const removeItem = () => {
+    dispatch({
+      type: "REMOVE_FROM_BASKET",
+      id: _id,
+    });
+  }
+
+  const addItem = () => {
     dispatch({
       type: "ADD_TO_CART",
       item: {
-        id,
+        _id,
         title,
         image,
         price,
         rating,
       },
     });
+    addToCart(_id) || removeItem();
+
   };
 
   return (
@@ -36,7 +52,15 @@ function Product({ id, title, image, price, rating }) {
 
       <img src={image} alt="" />
 
-      <button onClick={addToBasket}>Add to Cart</button>
+      <button
+        onClick={
+          getToken() ?
+            addItem
+            :
+            () => navigate("/login", { state: { from: location } })
+        }>
+        Add to Cart
+      </button>
     </div>
   );
 }

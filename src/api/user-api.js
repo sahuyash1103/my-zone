@@ -1,5 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
+import { getToken, removeToken } from "../services/authService";
 
 const success = (event) => {
   // console.info(`success: ${event}`);
@@ -50,12 +51,69 @@ export const signupUserWithEmailAndPassword = async (email, password) => {
 
 export const aboutMe = async (token = "") => {
   const headers = {
-    "x-auth-token": token || window.localStorage.getItem("x-auth-token"),
+    "x-auth-token": token || getToken(),
   };
 
   try {
     const result = await axios.get(
       process.env.REACT_APP_API_END_POINT + "about-me/",
+      { headers }
+    );
+
+    return result.data;
+  } catch (error) {
+    if (error.response && error.response.status === 400) {
+      removeToken();
+      toast.warn(error.response.data);
+    }
+  }
+};
+
+export const getCart = async () => {
+  const headers = {
+    "x-auth-token": getToken(),
+  };
+  try {
+    const result = await axios.get(
+      process.env.REACT_APP_API_END_POINT + "user/cart/",
+      { headers }
+    );
+    return result.data;
+  } catch (error) {
+    if (error.response && error.response.status === 400) {
+      toast.warn(error.response.data);
+    }
+  }
+};
+
+export const addToCart = async (item_id) => {
+  const headers = {
+    "x-auth-token": getToken(),
+  };
+
+  try {
+    const result = await axios.patch(
+      process.env.REACT_APP_API_END_POINT + "user/add-to-cart/",
+      { product_id: item_id },
+      { headers }
+    );
+
+    return result.data;
+  } catch (error) {
+    if (error.response && error.response.status === 400) {
+      toast.warn(error.response.data);
+    }
+  }
+};
+
+export const removeFromCart = async (item_id) => {
+  const headers = {
+    "x-auth-token": getToken(),
+  };
+  try {
+    const result = await axios.patch(
+      process.env.REACT_APP_API_END_POINT + "user/remove-from-cart/",
+      { product_id: item_id },
       { headers }
     );
 

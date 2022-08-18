@@ -4,6 +4,7 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
+import ProtectedComponent from "./components/ProtectedRoute";
 import { useEffect } from "react";
 import { useStateValue } from "./context/StateProvider";
 import { useTitle } from "./hooks/useTitle";
@@ -14,14 +15,15 @@ import Checkout from "./components/checkout/Checkout";
 import Payment from "./components/payment/Payment";
 import Orders from "./components/orders/Orders";
 import Login from "./components/login/Login";
-import { aboutMe } from "./api/api";
+import { aboutMe } from "./api/user-api";
+import { getToken } from "./services/authService";
 import "react-toastify/dist/ReactToastify.css"
 import "./App.css";
 
 
 function App() {
-  const [{ user }, dispatch] = useStateValue();
-  const token = window.localStorage.getItem('x-auth-token');
+  const [, dispatch] = useStateValue();
+  const token = getToken()
   useTitle("MyZone");
   useEffect(() => {
     if (token) {
@@ -32,7 +34,9 @@ function App() {
             user: about
           });
         })
-        .catch((error) => console.log(error))
+        .catch((error) => {
+          console.log(error);
+        })
     }
   }, [token, dispatch]);
 
@@ -50,37 +54,48 @@ function App() {
               </>
             }
           />
+
           <Route
             path="/checkout"
-            element={
-              <>
-                <Header />
-                <Checkout />
-              </>
-            }
+            element={<ProtectedComponent
+              component={
+                <>
+                  <Header />
+                  <Checkout />
+                </>
+              }
+            />}
           />
+
           <Route
             path="/payment"
-            element={
-              <>
-                <Header />
-                <Payment />
-              </>
-            }
+            element={<ProtectedComponent
+              component={
+                <>
+                  <Header />
+                  <Payment />
+                </>
+              }
+            />}
           />
+
           <Route
             path="/orders"
-            element={
-              <>
-                <Header />
-                <Orders />
-              </>
-            }
+            element={<ProtectedComponent
+              component={
+                <>
+                  <Header />
+                  <Orders />
+                </>
+              }
+            />}
           />
+
           <Route
             path="/login"
-            element={!user ? <Login /> : <Navigate to="/" />}
+            element={!token ? <Login /> : <Navigate to="/" />}
           />
+
         </Routes>
       </Router>
     </>

@@ -5,7 +5,7 @@ import { useStateValue } from "../../context/StateProvider";
 import CheckoutProduct from "./checkoutProduct/CheckoutProduct";
 
 function Checkout() {
-  const [{ cart, user }] = useStateValue();
+  const [{ user }] = useStateValue();
   return (<>
     <div className="checkout">
       <div className="checkout_left">
@@ -16,11 +16,11 @@ function Checkout() {
         />
         <div>
           <h3>Hello, {user ? user.username : "Guest"}</h3>
-          <h2 className="checkout__title">{cart.length ? `you have ${cart.length} items in cart` : "your cart is empty"}</h2>
-          {cart?.map((item, i) => (
+          <h2 className="checkout__title">{user?.cart.length ? `you have ${user?.cart.length} items in cart` : "your cart is empty"}</h2>
+          {user?.cart?.map((item, i) => (
             <CheckoutProduct
               key={i}
-              id={item.id}
+              _id={item._id}
               title={item.title}
               price={item.price}
               rating={item.rating}
@@ -34,7 +34,7 @@ function Checkout() {
       </div>
     </div>
     {
-      !cart.length ? <div style={{
+      !user || !user.cart?.length ? <div style={{
         'display': 'flex',
         'alignItems': 'center',
         'justifyContent': 'center',

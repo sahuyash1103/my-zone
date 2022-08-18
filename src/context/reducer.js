@@ -1,5 +1,4 @@
 export const initialState = {
-  cart: [],
   user: null,
 };
 
@@ -9,16 +8,21 @@ export const getCartTotal = (cart) =>
 function reducer(state, action) {
   switch (action.type) {
     case "ADD_TO_CART":
-      return {
-        ...state,
-        cart: [...state.cart, action.item],
-      };
+      return state.user
+        ? {
+            ...state,
+            user: {
+              ...state.user,
+              cart: [...state.user.cart, action.item],
+            },
+          }
+        : { user: null };
 
     case "REMOVE_FROM_CART":
-      const index = state.cart.findIndex(
+      const index = state.user.cart.findIndex(
         (cartItem) => cartItem.id === action.id
       );
-      let newCart = [...state.cart];
+      let newCart = [...state.user?.cart];
       if (index >= 0) {
         newCart.splice(index, 1);
       } else {
@@ -27,10 +31,15 @@ function reducer(state, action) {
         );
       }
 
-      return {
-        ...state,
-        cart: newCart,
-      };
+      return state.user
+        ? {
+            ...state,
+            user: {
+              ...state.user,
+              cart: newCart,
+            },
+          }
+        : { user: null };
 
     case "SET_USER":
       return {

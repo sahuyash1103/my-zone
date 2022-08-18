@@ -4,14 +4,15 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { useStateValue } from "../../context/StateProvider";
+import { removeToken } from "../../services/authService";
 import "./Header.css";
 
 function Header() {
-  const [{ cart, user }, dispatch] = useStateValue();
+  const [{ user }, dispatch] = useStateValue();
 
   const handleAuthenticaton = () => {
     if (user) {
-      window.localStorage.removeItem("x-auth-token");
+      removeToken();
       dispatch({
         type: "SET_USER",
         user: null
@@ -58,7 +59,7 @@ function Header() {
         <Link to="/checkout">
           <div className="header_optionBasket">
             <RiShoppingCartLine className="header_cart" />
-            <span className="header_basketCount">{cart?.length}</span>
+            <span className="header_basketCount">{user?.cart?.length}</span>
           </div>
         </Link>
       </div>
