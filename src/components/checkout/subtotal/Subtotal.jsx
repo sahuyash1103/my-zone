@@ -15,7 +15,6 @@ function Subtotal() {
         renderText={(value) => (
           <>
             <p>
-              {/* Part of the homework */}
               Subtotal ({user?.cart?.length} items): <strong>{value}</strong>
             </p>
             <small className="subtotal__gift">

@@ -33,9 +33,12 @@
 
 .payment__title {
     flex: 0.2;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 .payment__address,
-.payment__items {
+.payment__items,
+.payment__details {
     flex: 0.8;
 }

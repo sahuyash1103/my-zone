@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { getToken } from "../../../services/authService";
 import "./Product.css";
 
-function Product({ _id, title, image, price, rating }) {
+function Product({ _id, title, images, price, rating }) {
   const [, dispatch] = useStateValue();
   const location = useLocation();
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ function Product({ _id, title, image, price, rating }) {
       item: {
         _id,
         title,
-        image,
+        images,
         price,
         rating,
       },
@@ -50,7 +50,7 @@ function Product({ _id, title, image, price, rating }) {
         </div>
       </div>
 
-      <img src={image} alt="" />
+      <img src={images[0]} alt="" />
 
       <button
         onClick={

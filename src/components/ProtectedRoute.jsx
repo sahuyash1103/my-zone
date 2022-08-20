@@ -2,10 +2,9 @@ import React from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
 import { getToken } from '../services/authService'
 
-function ProtectedComponent({ component: Component, ...props }) {
+function ProtectedComponent(props) {
     const token = getToken();
     const location = useLocation();
-
     return (
         <>
             {
@@ -15,11 +14,10 @@ function ProtectedComponent({ component: Component, ...props }) {
                         replace
                     />
                     :
-                    <Component {...props} />
+                    props.children
             }
         </>
     );
-
 }
 
 export default ProtectedComponent

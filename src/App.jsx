@@ -20,7 +20,6 @@ import { getToken } from "./services/authService";
 import "react-toastify/dist/ReactToastify.css"
 import "./App.css";
 
-
 function App() {
   const [, dispatch] = useStateValue();
   const token = getToken()
@@ -57,38 +56,33 @@ function App() {
 
           <Route
             path="/checkout"
-            element={<ProtectedComponent
-              component={
-                <>
-                  <Header />
-                  <Checkout />
-                </>
-              }
-            />}
+            element={<ProtectedComponent>
+              <>
+                <Header />
+                <Checkout />
+              </>
+            </ProtectedComponent>}
           />
 
           <Route
             path="/payment"
-            element={<ProtectedComponent
-              component={
-                <>
-                  <Header />
-                  <Payment />
-                </>
-              }
-            />}
+            element={<ProtectedComponent>
+              <>
+                <Header />
+                <Payment />
+              </>
+            </ProtectedComponent>
+            }
           />
 
           <Route
             path="/orders"
-            element={<ProtectedComponent
-              component={
-                <>
-                  <Header />
-                  <Orders />
-                </>
-              }
-            />}
+            element={<ProtectedComponent>
+              <>
+                <Header />
+                <Orders />
+              </>
+            </ProtectedComponent>}
           />
 
           <Route

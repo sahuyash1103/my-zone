@@ -13,7 +13,7 @@ function Layout({ products }) {
                         title={product.title}
                         price={product.price}
                         rating={product.rating}
-                        image={product.images}
+                        images={product.images}
                     />))
                 }
             </div>

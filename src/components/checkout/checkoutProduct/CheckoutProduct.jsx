@@ -3,16 +3,15 @@ import { useStateValue } from "../../../context/StateProvider";
 import { removeFromCart } from "../../../api/user-api";
 import "./CheckoutProduct.css";
 
-function CheckoutProduct({ _id, title, price, rating, image, hideButton }) {
+function CheckoutProduct({ _id, title, price, rating, images, hideButton }) {
   const [, dispatch] = useStateValue();
-
   const addItem = () => {
     dispatch({
       type: "ADD_TO_CART",
       item: {
         _id,
         title,
-        image,
+        images: images,
         price,
         rating,
       },
@@ -29,7 +28,7 @@ function CheckoutProduct({ _id, title, price, rating, image, hideButton }) {
 
   return (
     <div className="checkout_product">
-      <img className="checkout_product_image" src={image} alt={title} />
+      <img className="checkout_product_image" src={images[0]} alt={title} />
       <div className="checkout_product_info">
         <p className="checkout_product_title">{title}</p>
         <p className="checkout_product_price">
