@@ -1,6 +1,5 @@
-import axios from "axios";
-import { toast } from "react-toastify";
-import { getToken, removeToken } from "../services/authService";
+import axios_instance, { setTokenHeader } from "./axios";
+import { removeToken } from "../services/authService";
 
 const success = (event) => {
   // console.info(`success: ${event}`);
@@ -12,115 +11,116 @@ const faliaure = (error) => {
   return Promise.reject(error);
 };
 
-axios.interceptors.response.use(success, faliaure);
+axios_instance.interceptors.response.use(success, faliaure);
 
 export const loginWithEmailAndPassword = async (email, password) => {
   try {
-    const result = await axios.post(
-      process.env.REACT_APP_API_END_POINT + "login/",
-      {
-        email: email,
-        password: password,
-      }
-    );
+    const result = await axios_instance.post("login/", {
+      email: email,
+      password: password,
+    });
+    setTokenHeader(result.data.token);
     return result.data.token;
   } catch (error) {
     if (error.response && error.response.status === 400) {
-      toast.warn(error.response.data);
+      console.warn(error.response.data);
     }
   }
 };
 
 export const signupUserWithEmailAndPassword = async (email, password) => {
   try {
-    const result = await axios.post(
-      process.env.REACT_APP_API_END_POINT + "signup/",
-      {
-        username: email.slice(0, email.indexOf("@")),
-        email: email,
-        password: password,
-      }
-    );
+    const result = await axios_instance.post("signup/", {
+      username: email.slice(0, email.indexOf("@")),
+      email: email,
+      password: password,
+    });
+    setTokenHeader(result.headers["x-auth-token"]);
     return result.headers["x-auth-token"];
   } catch (error) {
     if (error.response && error.response.status === 400) {
-      toast.warn(error.response.data);
+      console.warn(error.response.data);
     }
   }
 };
 
-export const aboutMe = async (token = "") => {
-  const headers = {
-    "x-auth-token": token || getToken(),
-  };
-
+export const aboutMe = async () => {
   try {
-    const result = await axios.get(
-      process.env.REACT_APP_API_END_POINT + "about-me/",
-      { headers }
-    );
+    const result = await axios_instance.get("about-me/");
 
     return result.data;
   } catch (error) {
     if (error.response && error.response.status === 400) {
-      removeToken();
-      toast.warn(error.response.data);
+      console.warn(error.response.data);
     }
+    removeToken();
   }
 };
 
 export const getCart = async () => {
-  const headers = {
-    "x-auth-token": getToken(),
-  };
   try {
-    const result = await axios.get(
-      process.env.REACT_APP_API_END_POINT + "user/cart/",
-      { headers }
-    );
+    const result = await axios_instance.get("user/cart/");
     return result.data;
   } catch (error) {
     if (error.response && error.response.status === 400) {
-      toast.warn(error.response.data);
+      console.warn(error.response.data);
     }
+    removeToken();
   }
 };
 
 export const addToCart = async (item_id) => {
-  const headers = {
-    "x-auth-token": getToken(),
-  };
-
   try {
-    const result = await axios.patch(
-      process.env.REACT_APP_API_END_POINT + "user/add-to-cart/",
-      { product_id: item_id },
-      { headers }
-    );
+    const result = await axios_instance.patch("user/add-to-cart/", {
+      product_id: item_id,
+    });
 
     return result.data;
   } catch (error) {
     if (error.response && error.response.status === 400) {
-      toast.warn(error.response.data);
+      console.warn(error.response.data);
     }
+    removeToken();
   }
 };
 
 export const removeFromCart = async (item_id) => {
-  const headers = {
-    "x-auth-token": getToken(),
-  };
   try {
-    const result = await axios.patch(
-      process.env.REACT_APP_API_END_POINT + "user/remove-from-cart/",
-      { product_id: item_id },
-      { headers }
-    );
+    const result = await axios_instance.patch("user/remove-from-cart/", {
+      product_id: item_id,
+    });
 
     return result.data;
   } catch (error) {
     if (error.response && error.response.status === 400) {
-      toast.warn(error.response.data);
+      console.warn(error.response.data);
     }
+    removeToken();
   }
 };
+
+export const emptyCart = async () => {
+  try {
+    const result = await axios_instance.patch("user/empty-cart/");
+
+    return result.data;
+  } catch (error) {
+    if (error.response && error.response.status === 400) {
+      console.warn(error.response.data);
+    }
+    removeToken();
+  }
+}
+
+export const getOrders = async () => {
+  try {
+    const result = await axios_instance.get("/orders/");
+
+    return result.data;
+  } catch (error) {
+    if (error.response && error.response.status === 400) {
+      console.warn(error.response.data);
+    }
+    removeToken();
+  }
+}

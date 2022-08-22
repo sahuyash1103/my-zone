@@ -37,6 +37,64 @@
     justify-content: space-evenly;
 }
 
+.payment__details {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.payment__details>form {
+    display: flex;
+    flex: 0.8;
+    flex-direction: column;
+    align-items: left;
+    justify-content: space-evenly;
+}
+
+.payment__details>form>input, .payment__details>form>div>input {
+    height: 50%;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    outline: none;
+    padding: 10px;
+    margin: 10px 5px;
+    font-size: 16px;
+}
+
+.card {
+    width: 175px;
+}
+
+.cvv {
+    width: 35px;
+}
+
+.MM, .YY {
+    width: 25px;
+}
+
+.cancel_btn {
+    background-color: lightgrey;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    padding: 10px 20px;
+    margin: 10px 5px;
+}
+
+.pay_btn {
+    background: #f0c14b;
+    border: none;
+    border-radius: 5px;
+    color: #111;
+    cursor: pointer;
+    padding: 10px 20px;
+    margin: 10px 5px;
+
+}
+
 .payment__address,
 .payment__items,
 .payment__details {

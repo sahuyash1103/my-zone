@@ -4,17 +4,42 @@ import { useStateValue } from '../../context/StateProvider';
 import CheckoutProduct from '../checkout/checkoutProduct/CheckoutProduct';
 import CurrencyFormat from 'react-currency-format';
 import { getCartTotal } from '../../context/reducer';
+import _ from "lodash";
+import { buy } from '../../api/store-api';
+import { emptyCart } from '../../api/user-api';
 import './Payment.css';
+import { useState } from 'react';
 
 function Payment() {
-    const [{ user }] = useStateValue();
+    const [{ user }, dispatch] = useStateValue();
     const navigate = useNavigate();
+    const [card, setCard] = useState('');
+    const [cvv, setCVV] = useState('');
+    const [mm, setMM] = useState('');
+    const [yy, setYY] = useState('');
+
+    const isNumeric = (value) => /^\d+$/.test(value);
+
+
 
     useEffect(() => {
         !user && navigate('/login');
 
         user?.cart?.length === 0 && navigate('/');
-    })
+    });
+
+    const pay = async (e) => {
+        e.preventDefault();
+        const products = _.map(user?.cart, '_id');
+        const result = await buy(products, getCartTotal(user?.cart));
+        if (result) {
+            emptyCart();
+            dispatch({
+                type: "EMPTY_CART",
+            });
+            navigate("/");
+        }
+    }
 
     return (
         <div className='payment'>
@@ -69,6 +94,30 @@ function Payment() {
                     </div>
                     <div className="payment__details">
                         <form>
+                            <input type={'text'} className='card' maxLength={'19'} placeholder="Card text" value={card} onChange={(e) => {
+                                isNumeric(e.target.value) && setCard(e.target.value);
+                            }} />
+                            <div>
+                                <input type={'text'} className='cvv' maxLength={'3'} placeholder="CVV text" value={cvv} onChange={(e) => {
+                                    isNumeric(e.target.value) && setCVV(e.target.value);
+                                }} />
+                                <input type={'text'} className='MM' maxLength={'2'} placeholder="MM" value={mm} onChange={(e) => {
+                                    isNumeric(e.target.value) && setMM(e.target.value);
+                                }} />
+                                <p style={{
+                                    display: 'inline-block',
+                                    fontSize: '35px',
+                                    fontWeight: '200',
+                                    MouseEvent: 'none',
+                                }}>/</p>
+                                <input type={'text'} className='YY' maxLength={'2'} placeholder="YY" value={yy} onChange={(e) => {
+                                    isNumeric(e.target.value) && setYY(e.target.value);
+                                }} />
+                            </div>
+                            <div>
+                                <button className='cancel_btn' onClick={() => navigate("/")}>Cancel</button>
+                                <button type='submit' value='submit' className='pay_btn' onClick={pay}>Pay</button>
+                            </div>
                         </form>
                     </div>
                 </div>

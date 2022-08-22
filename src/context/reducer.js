@@ -2,8 +2,13 @@ export const initialState = {
   user: null,
 };
 
-export const getCartTotal = (cart) =>
-  cart?.reduce((amount, item) => item.price + amount, 0);
+export const getCartTotal = (cart) => {
+  let total = 0;
+  for (let item in cart) {
+    total += parseFloat(cart[item].price);
+  }
+  return total.toFixed(2);
+};
 
 function reducer(state, action) {
   switch (action.type) {
@@ -40,6 +45,12 @@ function reducer(state, action) {
             },
           }
         : { user: null };
+
+    case "EMPTY_CART":
+      return {
+        ...state,
+        user: { ...state.user, cart: [] },
+      };
 
     case "SET_USER":
       return {

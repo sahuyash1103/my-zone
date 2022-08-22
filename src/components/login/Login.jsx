@@ -18,15 +18,14 @@ function Login() {
     e.preventDefault();
     const token = await loginWithEmailAndPassword(email, password);
     if (token) {
-      const about = await aboutMe(token);
-
+      const about = await aboutMe();
       const { state } = location;
-      navigate(state ? state.from?.pathname : '/');
       setToken(token);
       dispatch({
         type: "SET_USER",
         user: about
       });
+      navigate(state ? state.from?.pathname : '/');
     }
   };
 

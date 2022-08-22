@@ -1,30 +1,49 @@
-import axios from "axios";
-import { toast } from "react-toastify";
+import axios_instance from "./axios";
 
 export const getProdeucts = async () => {
   try {
-    const result = await axios.get(
-      process.env.REACT_APP_API_END_POINT + "products/"
-    );
+    const result = await axios_instance.get("/products/");
 
     return result.data;
   } catch (error) {
     if (error.response && error.response.status === 400) {
-      toast.warn(error.response.data);
+      console.warn(error.response.data);
     }
   }
 };
 
 export const getBanners = async () => {
   try {
-    const result = await axios.get(
-      process.env.REACT_APP_API_END_POINT + "banners/"
-    );
+    const result = await axios_instance.get("/banners/");
 
     return result.data;
   } catch (error) {
     if (error.response && error.response.status === 400) {
-      toast.warn(error.response.data);
+      console.warn(error.response.data);
+    }
+  }
+};
+
+export const buy = async (products, total) => {
+  try {
+    const result = await axios_instance.post("/buy/", { products, total });
+
+    return result.data;
+  } catch (error) {
+    if (error.response && error.response.status === 400) {
+      console.warn(error.response.data);
+    }
+  }
+};
+
+export const payment = async () => {
+  try {
+    const result = await axios_instance.post("/pay/");
+
+    return result.data;
+  } catch (error) {
+    if (error.response && error.response.status === 400) {
+      console.warn(error.response.data);
     }
   }
 };

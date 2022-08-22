@@ -8,7 +8,6 @@ import ProtectedComponent from "./components/ProtectedRoute";
 import { useEffect } from "react";
 import { useStateValue } from "./context/StateProvider";
 import { useTitle } from "./hooks/useTitle";
-import { ToastContainer } from "react-toastify";
 import Header from "./components/header/Header";
 import Home from "./components/home/Home";
 import Checkout from "./components/checkout/Checkout";
@@ -16,8 +15,7 @@ import Payment from "./components/payment/Payment";
 import Orders from "./components/orders/Orders";
 import Login from "./components/login/Login";
 import { aboutMe } from "./api/user-api";
-import { getToken } from "./services/authService";
-import "react-toastify/dist/ReactToastify.css"
+import { getToken, removeToken } from "./services/authService";
 import "./App.css";
 
 function App() {
@@ -34,6 +32,7 @@ function App() {
           });
         })
         .catch((error) => {
+          removeToken();
           console.log(error);
         })
     }
@@ -42,7 +41,6 @@ function App() {
   return (
     <>
       <Router>
-        <ToastContainer />
         <Routes>
           <Route
             path="/"
