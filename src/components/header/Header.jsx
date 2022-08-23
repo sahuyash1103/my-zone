@@ -36,7 +36,7 @@ function Header() {
             <IoMdArrowDropdown />
           </span>
         </div>
-        <input className="header_searchInput" type="text" />
+        <input className="header_searchInput" placeholder="Search My Zone" type="text" />
         <AiOutlineSearch className="header_searchIcon" />
       </div>
       <div className="header_nav">

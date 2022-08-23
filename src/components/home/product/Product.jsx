@@ -36,7 +36,11 @@ function Product({ _id, title, images, price, rating }) {
   return (
     <div className="product">
       <div className="product__info">
-        <h4>{title}</h4>
+        <h4 onClick={() => {
+          navigate(`/product/${_id}`, { state: { from: location } });
+        }}>
+          {title}
+        </h4>
         <p className="product__price">
           <small>$</small>
           <strong>{price}</strong>

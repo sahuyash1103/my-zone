@@ -51,7 +51,8 @@
     justify-content: space-evenly;
 }
 
-.payment__details>form>input, .payment__details>form>div>input {
+.payment__details>form>input,
+.payment__details>form>div>input {
     height: 50%;
     background-color: white;
     border-radius: 5px;
@@ -70,7 +71,8 @@
     width: 35px;
 }
 
-.MM, .YY {
+.MM,
+.YY {
     width: 25px;
 }
 
@@ -93,6 +95,14 @@
     padding: 10px 20px;
     margin: 10px 5px;
 
+}
+
+.pay_btn:hover {
+    background-color: #e4a912;
+}
+
+.cancel_btn:hover {
+    background-color: rgb(171, 171, 171);
 }
 
 .payment__address,

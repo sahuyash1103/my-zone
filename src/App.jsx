@@ -17,6 +17,7 @@ import Login from "./components/login/Login";
 import { aboutMe } from "./api/user-api";
 import { getToken, removeToken } from "./services/authService";
 import "./App.css";
+import ProductDetails from "./components/product_details/ProductDetails";
 
 function App() {
   const [, dispatch] = useStateValue();
@@ -48,6 +49,16 @@ function App() {
               <>
                 <Header />
                 <Home />
+              </>
+            }
+          />
+
+          <Route
+            path="/product/:product_id"
+            element={
+              <>
+                <Header />
+                <ProductDetails />
               </>
             }
           />

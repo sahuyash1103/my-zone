@@ -5,7 +5,7 @@ import CheckoutProduct from '../checkout/checkoutProduct/CheckoutProduct';
 import CurrencyFormat from 'react-currency-format';
 import { getCartTotal } from '../../context/reducer';
 import _ from "lodash";
-import { buy } from '../../api/store-api';
+import { buyProducts } from '../../api/store-api';
 import { emptyCart } from '../../api/user-api';
 import './Payment.css';
 import { useState } from 'react';
@@ -31,7 +31,7 @@ function Payment() {
     const pay = async (e) => {
         e.preventDefault();
         const products = _.map(user?.cart, '_id');
-        const result = await buy(products, getCartTotal(user?.cart));
+        const result = await buyProducts(products, getCartTotal(user?.cart));
         if (result) {
             emptyCart();
             dispatch({

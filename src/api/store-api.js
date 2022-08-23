@@ -12,6 +12,18 @@ export const getProdeucts = async () => {
   }
 };
 
+export const getProdeuct = async (id) => {
+  try {
+    const result = await axios_instance.get(`/products/product/${id}`);
+
+    return result.data;
+  } catch (error) {
+    if (error.response && error.response.status === 400) {
+      console.warn(error.response.data);
+    }
+  }
+};
+
 export const getBanners = async () => {
   try {
     const result = await axios_instance.get("/banners/");
@@ -24,7 +36,7 @@ export const getBanners = async () => {
   }
 };
 
-export const buy = async (products, total) => {
+export const buyProducts = async (products, total) => {
   try {
     const result = await axios_instance.post("/buy/", { products, total });
 

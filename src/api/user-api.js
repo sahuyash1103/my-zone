@@ -124,3 +124,15 @@ export const getOrders = async () => {
     removeToken();
   }
 }
+
+export const getOrder = async (id) => {
+  try {
+    const result = await axios_instance.get(`/orders/order/${id}`);
+
+    return result.data;
+  } catch (error) {
+    if (error.response && error.response.status === 400) {
+      console.warn(error.response.data);
+    }
+  }
+}

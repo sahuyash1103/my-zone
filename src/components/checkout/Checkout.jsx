@@ -3,9 +3,10 @@ import "./Checkout.css";
 import Subtotal from "./subtotal/Subtotal";
 import { useStateValue } from "../../context/StateProvider";
 import CheckoutProduct from "./checkoutProduct/CheckoutProduct";
+import { emptyCart } from "../../api/user-api";
 
 function Checkout() {
-  const [{ user }] = useStateValue();
+  const [{ user }, dispatch] = useStateValue();
   return (<>
     <div className="checkout">
       <div className="checkout_left">
@@ -16,7 +17,20 @@ function Checkout() {
         />
         <div>
           <h3>Hello, {user ? user.username : "Guest"}</h3>
-          <h2 className="checkout__title">{user?.cart.length ? `you have ${user?.cart.length} items in cart` : "your cart is empty"}</h2>
+          <div className="cart_status">
+            <h2 className="checkout__title">{user?.cart.length ? `you have ${user?.cart.length} items in cart` : "your cart is empty"}</h2>
+
+            {
+              !user.cart?.length || <button onClick={() => {
+                emptyCart();
+                dispatch({
+                  type: "EMPTY_CART",
+                });
+              }}>
+                Clear Cart
+              </button>
+            }
+          </div>
           {user?.cart?.map((item, i) => (
             <CheckoutProduct
               key={i}
