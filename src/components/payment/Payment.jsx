@@ -38,6 +38,7 @@ function Payment() {
                 type: "EMPTY_CART",
             });
             navigate("/");
+            alert('all the products have been ordered.')
         }
     }
 

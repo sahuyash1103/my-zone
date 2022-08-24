@@ -47,9 +47,11 @@ function ProductDetails() {
 
     const buy = async () => {
         const result = await buyProducts([product._id], product.price);
-        if (!result) {
-            alert('order failed.');
-        }
+        !result ? 
+            alert('order failed.') :
+            alert('product ordered')
+            ;
+        
     }
 
     return ((product && image) &&
