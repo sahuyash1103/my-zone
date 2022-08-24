@@ -1,10 +1,10 @@
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useStateValue } from "../../context/StateProvider";
 import { useParams } from "react-router-dom";
 import { buyProducts, getProdeuct } from "../../api/store-api";
 import { addToCart } from "../../api/user-api";
+import { getToken } from "../../services/authService";
 import "./ProductDetails.css";
 
 function ProductDetails() {
@@ -12,9 +12,15 @@ function ProductDetails() {
     const [, dispatch] = useStateValue();
     const [product, setProduct] = useState();
     const [image, setImage] = useState();
+    const location = useLocation();
+    const navigate = useNavigate();
 
     useEffect(() => {
-        getProdeuct(product_id).then((result) => setProduct(result));
+        getProdeuct(product_id).then((result) => {
+            setProduct(result);
+            setImage(result.images[0])
+        });
+
     }, [product_id]);
 
     const removeItem = () => {
@@ -46,24 +52,40 @@ function ProductDetails() {
         }
     }
 
-    return (product &&
+    return ((product && image) &&
         <div className="product-details">
             <div className="left_container">
                 <div className="image_container">
                     <div className="more_images">
                         {
-                            product.images.map((image, i) =>
-                                <img onClick={(e) =>
-                                    setImage(e.target.src)
-                                } src={image} key={i} alt="more" />
+                            product.images.map((img, i) =>
+                                <img onClick={(e) => {
+                                    setImage(e.target.src);
+                                    console.log(image === img);
+                                }
+                                } src={img} key={i} alt="more"
+                                    style={image === img ? { borderColor: 'black' } : ''}
+                                />
                             )
                         }
                     </div>
                     <img src={image || product.images[0]} alt="product" />
                 </div>
                 <div className="button_container">
-                    <button onClick={() => addItem()} className="add-to-cart">ADD TO CART</button>
-                    <button onClick={() => buy()} className="buy-btn">BUY</button>
+                    <button onClick={
+                        getToken() ?
+                            addItem
+                            :
+                            () => navigate("/login", { state: { from: location } })}
+                        className="add-to-cart">
+                        ADD TO CART
+                    </button>
+                    <button onClick={getToken() ?
+                        buy :
+                        () => navigate("/login", {
+                            state: { from: location }
+                        })}
+                        className="buy-btn">BUY</button>
                 </div>
             </div>
             <div className="right_container">

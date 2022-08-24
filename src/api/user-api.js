@@ -24,6 +24,7 @@ export const loginWithEmailAndPassword = async (email, password) => {
   } catch (error) {
     if (error.response && error.response.status === 400) {
       console.warn(error.response.data);
+      alert(error.response.data);
     }
   }
 };
@@ -40,6 +41,7 @@ export const signupUserWithEmailAndPassword = async (email, password) => {
   } catch (error) {
     if (error.response && error.response.status === 400) {
       console.warn(error.response.data);
+      alert(error.response.data);
     }
   }
 };

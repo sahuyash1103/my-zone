@@ -1,14 +1,16 @@
 .product-details {
     display: flex;
+    transition: 1s;
 }
 
 .left_container {
     display: flex;
-    flex: 0.4;
+    width: 40%;
     flex-direction: column;
     align-items: left;
     justify-content: top;
     background-color: #232931;
+    transition: 1s;
 
 }
 
@@ -17,16 +19,20 @@
     align-items: top;
     margin: 10px;
     padding: 10px;
+    transition: 1s;
+
 }
 
-.more_images{
+.more_images {
     display: block;
     margin: 0px 10px;
     border-radius: 5px;
     background-color: white;
+    transition: 1s;
+
 }
 
-.more_images>img{
+.more_images>img {
     display: flex;
     object-fit: contain;
     width: 50px;
@@ -34,6 +40,7 @@
     border-radius: 5px;
     border: 2px solid gray;
     cursor: pointer;
+    transition: 1s;
 }
 
 .image_container>img {
@@ -41,6 +48,8 @@
     object-fit: contain;
     border-radius: 5px;
     cursor: pointer;
+    width: 80%;
+    transition: 1s;
 }
 
 .button_container {
@@ -55,13 +64,15 @@
     margin: 0 20px;
     padding: 10px 20px;
     cursor: pointer;
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 300;
     background-color: lightgrey;
     color: #131921;
     border-radius: 5px;
     border: none;
     outline: none;
+    transition: 0.1s;
+
 }
 
 .add-to-cart:hover {
@@ -76,8 +87,9 @@
     border: none;
     border-radius: 5px;
     color: #111;
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 300;
+    transition: 0.1s;
 
 }
 
@@ -88,7 +100,7 @@
 
 .right_container {
     display: flex;
-    flex: 0.6;
+    width: 60%;
     flex-direction: column;
     align-items: left;
     justify-content: top;
